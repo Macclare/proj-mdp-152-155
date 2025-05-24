@@ -1,5 +1,5 @@
 # Stage 1: Build the Java app
-FROM maven:3.8.7-openjdk-17 AS build
+FROM maven:3.8.6-openjdk-17 AS build
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ FROM tomcat:9.0-jdk17
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the WAR built in the previous stage to Tomcat webapps
-COPY --from=build /app/target/calculator.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=build /app/target/WebAppCal-1.3.5.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose Tomcat port
 EXPOSE 8080
