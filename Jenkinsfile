@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "macclare/calculator-app"
         DOCKER_TAG = "latest"
+        KUBECONFIG_CREDENTIALS_ID = "kubeconfig"
     }
 
     stages {
