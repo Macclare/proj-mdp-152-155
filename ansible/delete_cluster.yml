@@ -1,0 +1,7 @@
+- hosts: k8s-master
+  become: yes
+  tasks:
+    - name: Delete Kubernetes cluster with KOPS
+      shell: |
+        export KOPS_STATE_STORE=s3://kops-state-unique-bucket
+        kops delete cluster --name=prod.k8s.local --yes

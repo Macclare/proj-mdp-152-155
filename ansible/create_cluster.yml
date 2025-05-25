@@ -1,0 +1,23 @@
+---
+- name: Create Kubernetes cluster
+  hosts: k8s-master
+  become: yes
+  vars:
+    kops_state_store: s3://kops-state-unique-bucket
+    cluster_name: prod.k8s.local
+  tasks:
+    - name: Create Kubernetes Cluster with KOPS
+      shell: |
+        export AWS_ACCESS_KEY_ID={{ aws_access_key }}
+        export AWS_SECRET_ACCESS_KEY={{ aws_secret_key }}
+        export KOPS_STATE_STORE={{ kops_state_store }}
+        kops create cluster \
+          --cloud=aws \
+          --name={{ cluster_name }} \
+          --zones=eu-north-1a,eu-north-1b \
+          --state=$KOPS_STATE_STORE \
+          --node-count=2 \
+          --node-size=t3.medium \
+          --control-plane-size=t3.medium \
+          --dns-zone=yourhostedzone.com \
+          --yes
