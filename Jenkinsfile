@@ -31,7 +31,6 @@ pipeline {
                 }
             }
         }
-    }
 
         stage('Deploy to Kubernetes') {
         steps {
@@ -40,6 +39,10 @@ pipeline {
             kubectl --kubeconfig=$KUBECONFIG apply -f k8s/deployment.yaml
             kubectl --kubeconfig=$KUBECONFIG apply -f k8s/service.yaml
             '''
-            }
-        }
+              }
+           }
+        } 
+    }
 }
+
+
